@@ -2,7 +2,7 @@ from flask import Blueprint, redirect, url_for, flash, render_template, request,
 from flask_login import current_user, login_user, logout_user, login_required
 
 from blog import bcrypt, db
-from blog.post.models import User, Post, Comment, Like
+from blog.models import User, Post, Comment, Like
 from blog.user.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
 from blog.user.utils import save_picture, send_reset_email
 

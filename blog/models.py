@@ -66,9 +66,6 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey(
         'post.id', ondelete="CASCADE"), nullable=False)
 
-    # app.app_context().push()
-    # db.create_all()
-
 
 class Like(db.Model):
     id = db.Column(db.Integer, primary_key=True)

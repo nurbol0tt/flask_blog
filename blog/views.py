@@ -1,7 +1,6 @@
-from flask import Blueprint, render_template, request, session
-from flask_sqlalchemy.session import Session
+from flask import Blueprint, render_template, request
 
-from blog.post.models import Post, User
+from blog.models import Post
 
 main = Blueprint('main', __name__, template_folder='templates')
 
