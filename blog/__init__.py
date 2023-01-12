@@ -3,6 +3,7 @@ from flask_bcrypt import Bcrypt
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+
 from blog.config import Config
 from flask_migrate import Migrate
 
@@ -28,9 +29,11 @@ def create_app(config_class=Config):
     from blog.user.views import user
     from blog.views import main
     from blog.post.views import post
+    from blog.comment.views import comment
 
     app.register_blueprint(user)
     app.register_blueprint(post)
     app.register_blueprint(main)
+    app.register_blueprint(comment)
 
     return app

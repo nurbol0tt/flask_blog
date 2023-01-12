@@ -2,7 +2,7 @@ from flask import Blueprint, redirect, url_for, flash, render_template, request,
 from flask_login import current_user, login_user, logout_user, login_required
 
 from blog import bcrypt, db
-from blog.models import User, Post, Comment, Like
+from blog.models import User, Post
 from blog.user.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
 from blog.user.utils import save_picture, send_reset_email
 
@@ -108,60 +108,3 @@ def reset_token(token):
         return redirect(url_for('user.login'))
 
     return render_template('reset_token.html', title='Reset Password', form=form)
-
-
-@user.route("/create-comment/<post_id>", methods=['POST'])
-@login_required
-def create_comment(post_id):
-    text = request.form.get('text')
-    print(text)
-    if not text:
-        flash('Comment cannot be empty.', category='error')
-    else:
-        post = Post.query.filter_by(id=post_id)
-        if post:
-            comment = Comment(
-                text=text, author=current_user.id, post_id=post_id)
-            db.session.add(comment)
-            db.session.commit()
-        else:
-            flash('Post does not exist.', category='error')
-
-    return redirect(url_for('main.home'))
-
-
-@user.route("/delete-comment/<comment_id>")
-@login_required
-def delete_comment(comment_id):
-    comment = Comment.query.filter_by(id=comment_id).first()
-    print(comment)
-    if not comment:
-        flash('Comment does not exist.', 'error')
-    elif current_user.id != comment.author and current_user.id != comment.post.author:
-        flash('You do not have permission to delete this comment.', category='error')
-    else:
-        print("DELETED")
-        db.session.delete(comment)
-        db.session.commit()
-
-    return redirect(url_for('main.home'))
-
-
-@user.route("/like-post/<post_id>", methods=['GET'])
-@login_required
-def like(post_id):
-    post = Post.query.filter_by(id=post_id).first()
-    like = Like.query.filter_by(
-        author=current_user.id, post_id=post_id).first()
-
-    if not post:
-        return jsonify({'error': 'Post does not exist.'}, 400)
-    elif like:
-        db.session.delete(like)
-        db.session.commit()
-    else:
-        like = Like(author=current_user.id, post_id=post_id)
-        db.session.add(like)
-        db.session.commit()
-
-    return redirect(url_for('main.home'))
