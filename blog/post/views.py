@@ -57,7 +57,6 @@ def update_post(post_id):
 @post.route("/post/<int:post_id>/delete", methods=['POST'])
 @login_required
 def delete_post(post_id):
-    print("Delete")
     post = Post.query.get_or_404(post_id)
     if post.user != current_user:
         abort(403)
@@ -65,5 +64,3 @@ def delete_post(post_id):
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('main.home'))
-
-
