@@ -1,3 +1,5 @@
+# Simple Blog
+
 1. First we need to copy the project
 ```
 https://github.com/nurbol0tt/flask_blog.git
