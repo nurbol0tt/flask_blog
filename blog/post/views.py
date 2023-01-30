@@ -38,7 +38,7 @@ def post_detail(post_id):
 def update_post(post_id):
     post = Post.query.get_or_404(post_id)
 
-    if post.author != current_user:
+    if post.user_id != current_user.id:
         abort(403)
     form = PostForm()
     if form.validate_on_submit():

@@ -11,7 +11,7 @@ comment = Blueprint('comment', __name__)
 @login_required
 def create_comment(post_id):
     text = request.form.get('text')
-    print(text)
+
     if not text:
         flash('Comment cannot be empty.', category='error')
     else:

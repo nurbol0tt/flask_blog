@@ -3,6 +3,7 @@ from datetime import datetime
 from flask import current_app
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+
 from sqlalchemy import func
 from sqlalchemy.orm import declarative_base
 
