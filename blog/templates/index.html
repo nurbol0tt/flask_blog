@@ -46,20 +46,30 @@
 {% endblock content %}
 
 {% block content2 %}
-<div class="col-md-4">
-  <div class="content-section">
-    <h3>Your Profile</h3>
-    <p class='text-muted'>You can put any information here you'd like.
-      <ul class="list-group">
-        <li class="list-group-item list-group-item-light">First name: </li>
-        <li class="list-group-item list-group-item-light">Announcements</li>
-        <li class="list-group-item list-group-item-light">Calendars</li>
-        <li class="list-group-item list-group-item-light">etc</li>
-      </ul>
-    </p>
-  </div>
-</div>
+
+{% if current_user.is_authenticated %}
+    <div class="col-md-4">
+          <div class="content-section">
+            <h3>Your Profile</h3>
+              <p class='text-muted'>First name: {{user.username}}</p>
+              <p class='text-muted'>Email: {{user.email}}</p>
+              <p class='text-muted'>Joined: {{user.joined.strftime('%Y-%m-%d')}}</p>
+
+            </p>
+          </div>
+    </div>
+{% else %}
+    <div class="col-md-4">
+          <div class="content-section">
+            <h3>Your Profile</h3>
+            <p class='text-muted'>You can put any information here you'd like.
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">First name: </li>
+                <li class="list-group-item list-group-item-light">Announcements</li>
+                <li class="list-group-item list-group-item-light">Joined:</li>
+              </ul>
+            </p>
+          </div>
+    </div>
+{% endif %}
 {% endblock content2 %}
-<!--from project_name import app, db-->
-<!--app.app_context().push()-->
-<!--db.create_all()-->
