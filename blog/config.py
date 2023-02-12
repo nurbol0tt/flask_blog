@@ -1,6 +1,6 @@
 import os
 
-from elasticsearch import Elasticsearch
+# from elasticsearch import Elasticsearch
 
 
 class Config:

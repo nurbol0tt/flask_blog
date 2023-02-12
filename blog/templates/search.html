@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+	</br>
+	  <form method="POST" action="{{ url_for('main.search')}}" class="d-flex">
+        {{ form.hidden_tag() }}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+      </form>
+    </br>
+	{% if posts %}
+
+	{% for post in posts %}
+		<div class="shadow p-3 mb-5 bg-body rounded">
+			<h2><a href="{{ url_for('post.post_detail', post_id=post.id)}}">{{ post.title }}</a></h2>
+			<small>By: {{ post.title }}<br/>
+			{{ post.date_posted }}</small> <br/><br/>
+			{{ post.content|safe }}
+		<br/><br/>
+		<a href="{{ url_for('post.post_detail', post_id=post.id)}}" class="btn btn-outline-secondary btn-sm">View Post</a>
+
+		{% if post.poster_id == current_user.id %}
+		<a href="{{ url_for('post.update_post', post_id=post.id)}}" class="btn btn-outline-secondary btn-sm">Edit Post</a>
+
+		<a href="{{ url_for('post.delete_post', post_id=post.id)}}" class="btn btn-outline-danger btn-sm">Delete Post</a>
+		{% endif %}
+
+	<br/><br/>
+</div>
+<br/>
+	{% endfor %}
+
+	{% else %}
+	Sorry, your search term: <strong>{{ searched }}</strong> was not found...
+	{% endif %}
+{% endblock %}

@@ -1,4 +1,4 @@
-from elasticsearch import Elasticsearch
+# from elasticsearch import Elasticsearch
 from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail
@@ -6,6 +6,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from blog.config import Config
 from flask_migrate import Migrate
+# from elasticsearch import Elasticsearch
+from elasticsearch_dsl import connections, Search, Index
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -15,8 +17,8 @@ login_manager.login_message_category = 'info'
 mail = Mail()
 migrate = Migrate()
 # es = connect_elasticserch
-es = Elasticsearch(['http://localhost:9200'])
-
+# es = Elasticsearch(['http://localhost:9200'])
+connections.create_connection(hosts=['localhost'])
 
 def create_app(config_class=Config):
     app = Flask(__name__)
