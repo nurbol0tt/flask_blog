@@ -9,14 +9,14 @@ ___
 2. Step 2 you need to create a file in the root of the project __.env__ example is the __env_example__ file
 
 ___
-3. Step 3 go to the directory and enter the following command in the terminal
+3. Step 3 you need to install requirements.txt
 
 ```
-docker-compose docker-compose build
+pip install -r requirements.txt
 ```
 ___
-4. Now, after creating the image, we just need to run our containers
+4. Now, after install requirements.txt, we just need to run our project
 
 ```
-docker-compose docker-compose.base up
+python run.py
 ```
