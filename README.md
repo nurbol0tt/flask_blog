@@ -15,10 +15,10 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 ___
-4. Step 2 you need to create a file in the root of the project __.env__ example is the __env_example__ file
+4. Step 4 you need to create a file in the root of the project __.env__ example is the __env_example__ file
 
 ___
-5. Step 3 you need to install requirements.txt
+5. Step 5 you need to install requirements.txt
 
 ```
 pip install -r requirements.txt
